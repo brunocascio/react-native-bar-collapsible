@@ -1,5 +1,5 @@
 
-# Bar Collapsible React Native
+# Bar Collapsible React Native (but without icons)
 
 It's a React Native bar component with different interactions: Text Only,
 Clickable, Collapsible.
