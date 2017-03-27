@@ -6,6 +6,10 @@ Clickable, Collapsible.
 
 ![demo](https://raw.githubusercontent.com/caroaguilar/images-gifs/master/react-native-bar-collapsible/demo.gif)
 
+*NOTE:**
+
+This forks hide the accordion icon, and adds the ability to use a custom component instead of a string in the accordion title.
+
 ## Install
 
 Install the package via npm:
