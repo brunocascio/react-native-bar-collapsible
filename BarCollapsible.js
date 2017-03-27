@@ -16,7 +16,7 @@ class BarCollapsible extends Component {
       show: props.showOnStart || false
     };
   }
-  
+
   componentDidMount() {
     if (this.props.clickable) {
       this.setState({
@@ -36,12 +36,12 @@ class BarCollapsible extends Component {
         title: this.props.title
       });
     }
-    
+
     this._tintColor = this.props.tintColor || '#FFF';
   }
-  
+
   render() {
-    
+
     if (this.props.clickable) {
       return this._renderClickable();
     } else if (this.props.collapsible) {
@@ -50,31 +50,46 @@ class BarCollapsible extends Component {
       return this._renderDefault();
     }
   }
-  
+
+  _toRender() {
+    let render = this.state.title;
+    if (typeof this.state.title == 'string') {
+      render = (
+        <Text style={[styles.title, this.props.titleStyle]}>
+          {this.state.title}
+        </Text>
+      )
+    }
+    return render;
+  }
+
   _renderDefault() {
     return (
       <View style={styles.bar}>
-        <Text style={[styles.title, this.props.titleStyle]}>{this.state.title}</Text>
+        {this._toRender()}
       </View>
     );
   }
-  
+
   _renderClickable() {
     return (
-      <TouchableHighlight style={styles.barWrapper} underlayColor='transparent' onPress={this.state.onPressed}>
+      <TouchableHighlight
+        style={styles.barWrapper}
+        underlayColor='transparent'
+        onPress={this.state.onPressed}>
         <View style={[styles.bar, this.props.style]}>
-          <Text style={[styles.title, this.props.titleStyle]}>{this.state.title}</Text>
+          {this._toRender()}
         </View>
       </TouchableHighlight>
     );
   }
-  
+
   _renderCollapsible() {
     return (
       <View>
         <TouchableHighlight style={styles.barWrapper} underlayColor='transparent' onPress={() => { this._toggleView()}}>
           <View style={[styles.bar, this.props.style]}>
-            <Text style={[styles.title, this.props.titleStyle]}>{this.state.title}</Text>
+            {this._toRender()}
           </View>
         </TouchableHighlight>
         { this.state.show &&  <Animated.View
@@ -84,7 +99,7 @@ class BarCollapsible extends Component {
       </View>
     );
   }
-  
+
   _toggleView() {
     this.setState({
       show: !this.state.show,
